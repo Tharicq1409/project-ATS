@@ -1,0 +1,17 @@
+create a new repository on the command line
+
+echo "# project-ATS" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M master
+git remote add origin https://github.com/Tharicq1409/project-ATS.git
+git push -u origin master
+
+push an existing repository from the command line
+
+git remote add origin https://github.com/Tharicq1409/project-ATS.git
+git branch -M master
+git push -u origin master
+
+

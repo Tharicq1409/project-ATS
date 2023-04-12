@@ -1,0 +1,35 @@
+how to print occurance of a pdf file only one time in the above code
+
+To print the occurrence of a PDF file only once in the above code, you can use a flag variable to keep track of whether the search term has been found in the PDF file or not. You can set the flag to True when the search term is found in the PDF file, and print the file path only if the flag is False.
+
+Here's the modified code:
+
+python
+import os
+import pdfplumber
+
+def search_pdfs(root_dir, search_term):
+    for root, dirs, files in os.walk(root_dir):
+        for file in files:
+            if file.endswith('.pdf'):
+                # Initialize flag variable
+                found_search_term = False
+                with pdfplumber.open(os.path.join(root, file)) as pdf:
+                    for page in pdf.pages:
+                        text = page.extract_text()
+                        if search_term.lower() in text.lower():
+                            # Set flag to True if search term is found
+                            found_search_term = True
+                # Print file path if search term is found for the first time in the file
+                if found_search_term:
+                    print(f"Found '{search_term}' in {os.path.join(root, file)}")
+
+In this code, the flag variable found_search_term is initially set to False. When the search term is found in a page of a PDF file, the flag is set to True. If the flag is already True, it means that the search term has already been found in the PDF file and there is no need to print the file path again. So, the file path is printed only if the flag is False.
+
+You can use this modified function in the same way as before:
+
+python
+user_input = input("Enter a SKILL to SEARCH : ")
+search_pdfs('C:/Users/3iintr00203/Desktop/resumes/perfect resumes', user_input)
+
+This code will print the file path only once for each PDF file that contains the search term.

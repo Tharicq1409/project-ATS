@@ -1,0 +1,119 @@
+tharicq14@gmail.com
+# Python Program which prints matching skills only once. ---> (edited  april 3)
+import os
+import pdfplumber
+
+def search_pdfs(root_dir, search_term):
+    for root, dirs, files in os.walk(root_dir):
+        for file in files:
+            if file.endswith('.pdf'):
+                # Initialize flag variable
+                found_search_term = False
+                with pdfplumber.open(os.path.join(root, file)) as pdf:
+                    for page in pdf.pages:
+                        text = page.extract_text()
+                        if search_term.lower() in text.lower():
+                            # Set flag to True if search term is found
+                            found_search_term = True
+                # Print file path if search term is found for the first time in the file
+                if found_search_term:
+                    print(f"Found '{search_term}' in {os.path.join(root, file)}")
+user_input = input("Enter a SKILL to SEARCH : ")
+search_pdfs('C:/Users/3iintr00203/Desktop/resumes/perfect resumes', user_input)
+
+The code you provided searches for a specific search term in PDF files located in a directory and its subdirectories. The program prints the file path where the search term is found in each PDF file. If the search term appears multiple times in a single file, the program will print the file path for each occurrence.
+
+If you want to print the file path only once for each file, you can modify the code as follows:
+
+python
+import os
+import pdfplumber
+
+def search_pdfs(root_dir, search_term):
+    for root, dirs, files in os.walk(root_dir):
+        for file in files:
+            if file.endswith('.pdf'):
+                # Initialize flag variable
+                found_search_term = False
+                with pdfplumber.open(os.path.join(root, file)) as pdf:
+                    for page in pdf.pages:
+                        text = page.extract_text()
+                        if search_term.lower() in text.lower():
+                            # Set flag to True if search term is found
+                            found_search_term = True
+                            break  # exit loop if search term is found
+                # Print file path if search term is found for the first time in the file
+                if found_search_term:
+                    print(f"Found '{search_term}' in {os.path.join(root, file)}")
+                    break  # exit loop if file is printed
+
+The modifications made to the code include:
+
+    Adding a break statement to exit the loop once the search term is found on a page of the PDF file.
+    Adding a second break statement to exit the loop and print the file path once the search term is found in the file for the first time.
+
+tharicq14@gmail.com
+could you please convert this code into django project
+
+Sure, I can help you convert the code into a Django project. Here are the steps:
+
+    Create a new Django project using the command:
+
+    django-admin startproject pdfsearch
+
+    Create a new app within the project using the command:
+
+    python manage.py startapp pdfsearchapp
+
+    In the pdfsearchapp directory, create a new file called utils.py and copy the search_pdfs function into it.
+
+    In the pdfsearchapp directory, create a new file called views.py and add the following code:
+
+    python
+    from django.shortcuts import render
+    from .utils import search_pdfs
+
+    def home(request):
+        if request.method == 'POST':
+            search_term = request.POST.get('search_term')
+            results = search_pdfs('C:/Users/3iintr00203/Desktop/resumes/perfect resumes', search_term)
+            return render(request, 'pdfsearchapp/results.html', {'results': results})
+        else:
+            return render(request, 'pdfsearchapp/home.html')
+
+    In the pdfsearchapp directory, create two new templates folders called templates and static. In the templates folder, create two new HTML files called home.html and results.html.
+
+    In the home.html file, add the following code:
+
+    graphql
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="search_term">
+        <input type="submit" value="Search">
+    </form>
+
+    In the results.html file, add the following code:
+
+    css
+    <h1>Search Results</h1>
+    {% if results %}
+        {% for result in results %}
+            <p>{{ result }}</p>
+        {% endfor %}
+    {% else %}
+        <p>No results found</p>
+    {% endif %}
+
+    In the pdfsearch directory, open the settings.py file and add 'pdfsearchapp' to the INSTALLED_APPS list.
+
+    Finally, in the pdfsearch directory, open the urls.py file and add the following code:
+
+    javascript
+    from django.urls import path
+    from pdfsearchapp import views
+
+    urlpatterns = [
+        path('', views.home, name='home'),
+    ]
+
+That's it! You should now be able to run the Django server using the command python manage.py runserver and access the PDF search functionality by navigating to http://localhost:8000/ in your web browser.

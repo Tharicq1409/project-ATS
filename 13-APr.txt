@@ -1,0 +1,23 @@
+ 1) Application Integration Cloud Instance Name:
+     OIC99271859
+
+ 2) Application Integration Home Page URL:
+      https://oic99271859-ocuocictrng29-ld.integration.ocp.oraclecloud.com/ic/home
+
+ 3) ATP Database Name
+      ATP99271859
+
+ 4) FTP Server IP
+     158.101.122.166 
+
+ 5) User FTP credentials
+     username: user1
+     password: Welcome_1234
+
+
+User Name: 99271859-ora031
+Password: oN80sLBH2G
+
+
+
+read CSV file -- to find "farah" and use REST api to update lookup

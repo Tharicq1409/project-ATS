@@ -19,5 +19,5 @@ from Nuvaapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.welcome,name='indexpage'),
-    path('searchpage.html', views.search_result, name='home'),
+    path('sample.html', views.search_result, name='home'),
 ]

@@ -8,6 +8,7 @@ from urllib.parse import quote
 # Create your views here.
 def welcome(request):
     return render(request, 'app1/Main.html')
+
 def search_result(request):
     results = None
     search_term =''
@@ -17,5 +18,4 @@ def search_result(request):
             # Modify the results list to include tuples of (file_path, file_name)
             results = [(os.path.join(root, file), file) for root, _, files in os.walk('C:/Users/3iintr00203/Desktop/resumes/perfect resumes') for file in files if file.endswith('.pdf') and search_term.lower() in pdfplumber.open(os.path.join(root, file)).pages[0].extract_text().lower()]
             #results = search_pdfs('C:/Users/3iintr00203/Desktop/resumes/perfect resumes', search_term)
-    return render(request, 'app1/searchpage.html', {'results': results,'search_term':search_term})
-
+    return render(request, 'app1/sample.html', {'results': results,'search_term':search_term})

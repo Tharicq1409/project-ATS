@@ -1,0 +1,84 @@
+'''
+import requests
+import json
+
+# Define the URL and parameters
+url = 'https://fa-euth-dev88-saasfademo1.ds-fa.oraclepdemos.com/fscmRestApi/resources/11.13.18.05/commonLookups/{LookupType}/child/lookupCodes/{LookupCode}'
+lookup_type = 'ALLOW_SS_UNRST_PROCG'
+lookup_code = 'HRDC'
+username = 'scm04.student'
+password = 'cRt7r#8*'
+
+# Define the request body as a dictionary
+request_body = {
+    #"Meaning" : "Daily Rate Unit of Measure_MIR",
+    "Description" : "A measurement of working hours, or days of a worker or calendar to calculate a daily rate.",
+}
+
+# Convert the request body to JSON format
+json_data = json.dumps(request_body)
+
+# Define the headers with the content type as JSON
+headers = {
+    'Content-Type': 'application/json',
+}
+
+# Update the URL with the lookup type and lookup code
+url = url.format(LookupType=lookup_type, LookupCode=lookup_code)
+
+# Define the authentication as a tuple
+auth = (username, password)
+
+# Send the PUT request with the updated URL, headers, JSON data, and authentication
+response = requests.put(url, headers=headers, data=json_data, auth=auth)
+
+# Print the response status code and content
+print(response.status_code)
+print(response.content)
+'''
+
+import requests
+import json
+
+# Define the URL and parameters
+url = 'https://fa-euth-dev88-saasfademo1.ds-fa.oraclepdemos.com/fscmRestApi/resources/11.13.18.05/commonLookups/{LookupType}/child/lookupCodes/{LookupCode}'
+lookup_type = 'ALLOW_SS_UNRST_PROCG'
+lookup_code = 'HRDC'
+username = 'scm04.student'
+password = 'cRt7r#8*'
+
+# Define the request body as a dictionary with the Meaning attribute
+request_body = {
+    "Meaning" : "Daily Rate Unit of Measure_MIR",
+    "Description" : "A measurement of working hours, or days of a worker or calendar to calculate a daily rate.",
+    "LookupValueTranslations" : [
+        {
+            "Language" : "US",
+            "Meaning" : "Daily Rate Unit of Measure_MIR",
+            "Description" : "A measurement of working hours, or days of a worker or calendar to calculate a daily rate."
+        }
+    ]
+}
+
+# Convert the request body to JSON format
+json_data = json.dumps(request_body)
+
+# Define the headers with the content type as JSON
+headers = {
+    'Content-Type': 'application/json',
+}
+
+# Update the URL with the lookup type and lookup code
+url = url.format(LookupType=lookup_type, LookupCode=lookup_code)
+
+# Define the authentication as a tuple
+auth = (username, password)
+
+# Send the PUT request with the updated URL, headers, JSON data, and authentication
+response = requests.put(url, headers=headers, data=json_data, auth=auth)
+
+# Print the response status code and content
+print(response.status_code)
+print(response.content)
+
+

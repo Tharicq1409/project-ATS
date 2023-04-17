@@ -34,37 +34,36 @@
   </form> -->
 
 
- 
+
 
 
   <!--<h1>PDF Search</h1>-->
   <div class="search-box">
-  <form method="POST">
-    {% csrf_token %}
-    <!-- <label for="search_term">Enter a skill to search:</label> -->
-    <!-- <input type="text" name="search_term" class="search-txt" id="input"> -->
-    <input class="search-txt" type="text" name="search_term" placeholder="Type to Search">
-    <!-- <input type="submit" value="Search" onclick="printvalue()"> -->
-    <a href="" class="search-btn" onclick="printvalue()">
-      <i class="fa fa-search" style="font-size:30px" ></i>
-    </a>
-  </form>
-</div>
+    <form method="POST">
+      {% csrf_token %}
+      <!-- <label for="search_term">Enter a skill to search:</label> -->
+      <!-- <input type="text" name="search_term" class="search-txt" id="input"> -->
+      <input class="search-txt" type="text" name="search_term" placeholder="Type to Search">
+      <!-- <input type="submit" value="Search" onclick="printvalue()"> -->
+      <a href="" class="search-btn" onclick="printvalue()">
+        <i class="fa fa-search" style="font-size:30px"></i>
+      </a>
+    </form>
+  </div>
 
 
   {% if results %}
-  <p id="output"></p>
-  <h2>Your Result for {{ search_term }} Skill Containing Resumes</h2>
-  <br>
-  <h2>Search results:</h2>
-  <ul>
-    {% for result in results %}
-    <!--<li>{{ result }}</li>-->
-    <li><a href="{{ result.0 }}">{{ result.1 }}</a></li>
-    {% empty %}
-    <li>No results found.</li>
-    {% endfor %}
-  </ul>
+        <p id="output"></p> 
+        <h2>Your Result for {{ search_term }} Skill Containing Resumes</h2>
+        <h2>Search results:</h2>
+        <ul>
+            {% for result in results %}
+                <!--<li>{{ result }}</li>-->
+                <li><a href="{{ result.0 }}">{{ result.1 }}</a></li>
+            {% empty %}
+                <li>No results found.</li>
+            {% endfor %}
+        </ul>
   {% endif %}
 
 
